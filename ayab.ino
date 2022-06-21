@@ -82,6 +82,7 @@ void h_reqStart(const uint8_t* buffer, size_t size) {
 void h_cnfLine(const uint8_t* buffer, size_t size) {
   byte _lineNumber = 0;
   byte _flags = 0;
+  byte _blank = 0;
   byte _crc8  = 0;
   bool _flagLastLine = false;
 
@@ -92,12 +93,16 @@ void h_cnfLine(const uint8_t* buffer, size_t size) {
     lineBuffer[i] = ~(byte)buffer[i+2];
   }
   _flags = (byte)buffer[27];
+  _blank = bitRead(_flags, 1);
   _crc8  = (byte)buffer[28];
 
   // TODO insert CRC8 check
 
   if (knitter->setNextLine(_lineNumber)) {
     // Line was accepted
+    if (!_blank) {
+      knitter->setColor((_flags & 28) >> 3);
+    }
     _flagLastLine = bitRead(_flags, 0);
     if ( _flagLastLine ) {
       knitter->setLastLine();
@@ -171,6 +176,15 @@ void setup() {
   pinMode(LED_PIN_B, OUTPUT);
   digitalWrite(LED_PIN_A, 1);
   digitalWrite(LED_PIN_B, 1);
+
+  pinMode(LED_COLOR_PIN_A, OUTPUT);
+  pinMode(LED_COLOR_PIN_B, OUTPUT);
+  pinMode(LED_COLOR_PIN_C, OUTPUT);
+  pinMode(LED_COLOR_PIN_D, OUTPUT);
+  digitalWrite(LED_COLOR_PIN_A, LOW);
+  digitalWrite(LED_COLOR_PIN_B, LOW);
+  digitalWrite(LED_COLOR_PIN_C, LOW);
+  digitalWrite(LED_COLOR_PIN_D, LOW);
 
   pinMode(DBG_BTN_PIN, INPUT);
 

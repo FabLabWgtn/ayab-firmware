@@ -83,6 +83,11 @@ This file is part of AYAB.
 
 #define DBG_BTN_PIN 7  // DEBUG BUTTON
 
+#define LED_COLOR_PIN_A 10
+#define LED_COLOR_PIN_B 11
+#define LED_COLOR_PIN_C 12
+#define LED_COLOR_PIN_D 13
+
 // Machine constants
 #define NUM_NEEDLES    200
 #define END_LEFT       0

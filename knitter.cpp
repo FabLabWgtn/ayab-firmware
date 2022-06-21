@@ -126,6 +126,21 @@ bool Knitter::setNextLine(byte lineNumber) {
   return false;
 }
 
+void Knitter::setColor(byte color) {
+  digitalWrite(LED_COLOR_PIN_A, LOW);
+  digitalWrite(LED_COLOR_PIN_B, LOW);
+  digitalWrite(LED_COLOR_PIN_C, LOW);
+  digitalWrite(LED_COLOR_PIN_D, LOW);
+  if (color == 0) {
+    digitalWrite(LED_COLOR_PIN_A, HIGH);
+  } else if (color == 1) {
+    digitalWrite(LED_COLOR_PIN_B, HIGH);
+  } else if (color == 2) {
+    digitalWrite(LED_COLOR_PIN_C, HIGH);
+  } else if (color == 3) {
+    digitalWrite(LED_COLOR_PIN_D, HIGH);
+  }
+}
 
 void Knitter::setLastLine() {
   // lastLineFlag is evaluated in s_operate
