@@ -98,6 +98,7 @@ void h_cnfLine(const uint8_t* buffer, size_t size) {
 
   if (knitter->setNextLine(_lineNumber)) {
     // Line was accepted
+    knitter->setColor(bitRead(_flags, 1));
     _flagLastLine = bitRead(_flags, 0);
     if ( _flagLastLine ) {
       knitter->setLastLine();

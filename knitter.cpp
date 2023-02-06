@@ -126,6 +126,9 @@ bool Knitter::setNextLine(byte lineNumber) {
   return false;
 }
 
+void Knitter::setColor(byte color){
+  DEBUG_PRINT("Setting color to: "+color);
+}
 
 void Knitter::setLastLine() {
   // lastLineFlag is evaluated in s_operate

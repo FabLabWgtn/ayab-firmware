@@ -44,6 +44,7 @@ class Knitter {
                       byte(*line));
   bool startTest(void);
   bool setNextLine(byte lineNumber);
+  void setColor(byte color);
   void setLastLine();
 
  private:
